@@ -30,4 +30,10 @@ docker run -d \
 -e MARATHON_MASTER=zk://192.168.50.4:2181/mesos \
 -e MARATHON_ZK=zk://192.168.50.4:2181/marathon \
 --name marathon --net host --restart always mesoscloud/marathon:0.11.0-ubuntu-15.04 marathon --logging_level debug
+
+
+docker run -d -p 5000:5000 --restart=always --name registry \
+-v /var/docker/config/config.yml:/etc/docker/registry/config.yml \
+-v /var/docker/config/ssl:/etc/docker/registry/ssl registry:2
+
 ```
