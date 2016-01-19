@@ -23,15 +23,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #        " | sudo pfctl -f - > /dev/null 2>&1; echo "==> Fowarding Ports: 80 -> 8080, 443 -> 8443"')
 #  end
   config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--memory", "5120"]
+    v.customize ["modifyvm", :id, "--memory", "1024"]
     v.customize ["modifyvm", :id, "--cpus", "5"]
     v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
   end
 
   config.vm.define :local do |local|
-	#local.vm.network "public_network", bridge: 'en0: Wi-Fi (AirPort)'
-    local.vm.network "private_network", ip: "192.168.50.4"
+    local.vm.network "private_network", ip: "192.168.50.200"
     local.vm.network "forwarded_port", host: 3306, guest: 3306
+    local.vm.network "forwarded_port", host: 22,  guest: 2223 
     local.vm.network "forwarded_port", host: 8800, guest: 8800
     local.vm.network "forwarded_port", host: 10000, guest: 80
     local.vm.network "forwarded_port", host: 10001, guest: 81
